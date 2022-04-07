@@ -1,0 +1,11 @@
+<div class="table">
+    <div class="row head">
+        <div class="field">ID</div>
+        <div class="field">User ID</div>
+        <div class="field">Title</div>
+        <div class="field">Due on</div>
+        <div class="field">Pending</div>
+    </div>
+    <app-row *ngFor="let entry of data" [data]="entry"></app-row>
+    <app-spinner *ngIf="data.length === 0"></app-spinner>
+</div>

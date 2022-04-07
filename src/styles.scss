@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+.row{
+    display: grid;
+    margin: 10px;
+    padding: 10px;
+    margin: 0px;
+    grid-template-columns: [first] 50px [line] 70px  [line] 300px [line] 250px [line] 200px [end];
+    grid-template-rows: [row1-start] 100% [last-line];
+
+
+}
+
+.head{
+    font-weight: bold;
+}
+.table{
+    width: fit-content;
+}
