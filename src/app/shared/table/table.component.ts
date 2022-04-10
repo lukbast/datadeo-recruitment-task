@@ -20,8 +20,6 @@ export class TableComponent implements OnInit {
   private selectNthElement (data: Data[], fieldName:fields, fieldValue: any, n: number): Data[] {
       let count = 0;
       for (let entry of data){
-        console.log(entry)
-
         if (entry[fieldName] === fieldValue){
           count += 1;
         }
@@ -39,8 +37,7 @@ export class TableComponent implements OnInit {
     this.isLoading = true
     this.dataService.getData()
       .subscribe((data) =>  {
-      const tempData = data as Data[];
-      this.data = this.selectNthElement(tempData, "status", "pending", 2);
+      this.data = this.selectNthElement(data as Data[], "status", "pending", 2);
       this.isLoading = false
     })
   }
