@@ -5,3 +5,5 @@ export interface Data {
     due_on: string,
     status: string
   }
+
+  export type fields = "id" | "user_id" | "title" | "due_on" | "status"

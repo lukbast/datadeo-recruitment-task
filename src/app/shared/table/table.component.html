@@ -7,5 +7,8 @@
         <div class="field">Pending</div>
     </div>
     <app-row *ngFor="let entry of data" [data]="entry"></app-row>
-    <app-spinner *ngIf="data.length === 0"></app-spinner>
+    <app-spinner *ngIf="isLoading"></app-spinner>
+    <p class="notification" *ngIf="data.length === 0 && !isLoading">
+        There no data to display
+    </p>
 </div>
