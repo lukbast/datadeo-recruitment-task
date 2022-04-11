@@ -13,7 +13,7 @@ export class TableComponent implements OnInit, OnDestroy {
 
   dataSubscripion = new Subscription()
   data: Data[] = []
-  isLoading = false
+  isLoading = true
   error = false
 
   constructor(private dataService: DataService) {
@@ -45,6 +45,7 @@ export class TableComponent implements OnInit, OnDestroy {
           this.isLoading = false
         },
         error: (err) =>{
+          this.isLoading = false
           this.error = true
         }
       })
