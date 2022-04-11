@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
 
   private API_URL:string = 'https://gorest.co.in/public/v2/todos'
+  private dataObservable = this.httpClient.get(this.API_URL);
 
 
   constructor(private httpClient: HttpClient) { 
@@ -14,6 +15,6 @@ export class DataService {
   }
 
   public getData(){
-    return this.httpClient.get(this.API_URL);
+    return this.dataObservable
   }
 }

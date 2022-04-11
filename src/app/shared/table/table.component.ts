@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { DataService } from 'src/app/data.service';
 import { Data, fields } from '../types';
 
@@ -8,10 +9,11 @@ import { Data, fields } from '../types';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnDestroy {
 
   data: Data[] = []
   isLoading = true
+  dataSubscripion = new Subscription()
 
   constructor(private dataService: DataService) {
     
@@ -35,10 +37,14 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading = true
-    this.dataService.getData()
+    this.dataSubscripion = this.dataService.getData()
       .subscribe((data) =>  {
       this.data = this.selectNthElement(data as Data[], "status", "pending", 2);
       this.isLoading = false
     })
+  }
+
+  ngOnDestroy(): void {
+      this.dataSubscripion.unsubscribe()
   }
 }
