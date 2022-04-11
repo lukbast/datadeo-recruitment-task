@@ -8,7 +8,10 @@
     </div>
     <app-row *ngFor="let entry of data" [data]="entry"></app-row>
     <app-spinner *ngIf="isLoading"></app-spinner>
-    <p class="notification" *ngIf="data.length === 0 && !isLoading">
+    <p class="notification" *ngIf="data.length === 0 && !isLoading && !error">
         There no data to display
+    </p>
+    <p class="notification" *ngIf="error && !isLoading">
+        Failed to load data. There is problem with your connection or servers were blown up.
     </p>
 </div>

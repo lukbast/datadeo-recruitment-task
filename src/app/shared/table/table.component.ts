@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/data.service';
 import { Data, fields } from '../types';
 
@@ -11,9 +11,10 @@ import { Data, fields } from '../types';
 })
 export class TableComponent implements OnInit, OnDestroy {
 
-  data: Data[] = []
-  isLoading = true
   dataSubscripion = new Subscription()
+  data: Data[] = []
+  isLoading = false
+  error = false
 
   constructor(private dataService: DataService) {
     
@@ -36,12 +37,17 @@ export class TableComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.isLoading = true
     this.dataSubscripion = this.dataService.getData()
-      .subscribe((data) =>  {
-      this.data = this.selectNthElement(data as Data[], "status", "pending", 2);
-      this.isLoading = false
-    })
+      .subscribe({
+        next: (data) => {
+          this.isLoading = true
+          this.data = this.selectNthElement(data as Data[], "status", "pending", 2);
+          this.isLoading = false
+        },
+        error: (err) =>{
+          this.error = true
+        }
+      })
   }
 
   ngOnDestroy(): void {
